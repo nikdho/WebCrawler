@@ -1,22 +1,22 @@
-package algorithms;
-// Note: The type "T" must have a ".toString" method to work
+package com.dhomse.webcrawler;
 
 import java.util.Hashtable;
 import java.util.ArrayList;
 import java.util.Enumeration;
 
-public class GraphNode<T> { // T is the type of the key
-    private T key = null;
+public class GraphNode<T> {
+
+    private T key;
     private Hashtable<GraphNode<T>, Double> weightedNeighbors = new Hashtable<>();
 
-    public GraphNode(T data) {
+    GraphNode(T data) {
         this.key = data;
     }
 
     public void addEdge(GraphNode<T> neighbor) {
-        if (weightedNeighbors.containsKey(neighbor))
-            System.out.println("Updating existing edge weight from "
-+ key.toString() + " to " + neighbor.key.toString() + " to 1.0.");
+        if (weightedNeighbors.containsKey(neighbor)) {
+            System.out.printf("Updating existing edge weight from %s to %s to 1.0.", key.toString(), neighbor.key.toString());
+        }
         weightedNeighbors.put(neighbor, 1.0);
     }
 
@@ -27,7 +27,7 @@ public class GraphNode<T> { // T is the type of the key
         weightedNeighbors.put(neighbor, weight);
     }
 
-    public T getKey() {
+    T getKey() {
         return key;
     }
 
@@ -37,10 +37,11 @@ public class GraphNode<T> { // T is the type of the key
 
     public ArrayList<GraphNode<T>> getAdjacentEdges() {
         Enumeration<GraphNode<T>> edges = weightedNeighbors.keys();
-        ArrayList<GraphNode<T>> returnMe = new ArrayList<>();
-        while(edges.hasMoreElements())
-            returnMe.add(edges.nextElement());
-        return returnMe;
+        ArrayList<GraphNode<T>> adjacentEdges = new ArrayList<>();
+        while(edges.hasMoreElements()) {
+            adjacentEdges.add(edges.nextElement());
+        }
+        return adjacentEdges;
     }
     public Double getWeight(GraphNode<T> t) {
     	return weightedNeighbors.get(t);
