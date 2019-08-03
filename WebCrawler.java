@@ -47,4 +47,4 @@ public class WebCrawler {
 	public static void main(String []args) throws JDOMException, IOException, FileNotFoundException {
 		System.out.println(webCrawl(args).toStringWithWeights());
 	}
-	}
+}
